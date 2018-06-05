@@ -1,2 +1,5 @@
 # VEX-2018
-VEX 2018 Turning Point
+## 45784's VEX Turning-Point Code Repo
+
+### Current Authors
+- Andrew Schineller (@schineaj23)
