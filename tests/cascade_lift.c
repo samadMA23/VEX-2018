@@ -5,7 +5,6 @@
 #define MAX_SPEED 127
 
 bool bYWire = true;
-
 task main()
 {
 	clearTimer(T1);
