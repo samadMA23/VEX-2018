@@ -2,4 +2,4 @@
 ## 45784's VEX Turning-Point Code Repo
 
 ### Current Authors
-- Andrew Schineller (@schineaj23)
+- Andrew Schineller ([url=github.com/schineaj23]@schineaj23[/url])
