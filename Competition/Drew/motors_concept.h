@@ -38,10 +38,10 @@ void mapJoystick() {
 	bool piston_enabled = false;
 
 	//This works, right?
-	if(vexRT[Btn5DXmtr2] == TRUE) {
+	if(vexRT[Btn5DXmtr2] == TRUE || piston_enabled) {
 		motor[p_piston] = MAX_SPEED;
 		piston_enabled = !piston_enabled;
-	} else if(!piston_enabled) {
+		} else if(!piston_enabled) {
 		motor[p_piston] = NO_SPEED;
 	}
 
