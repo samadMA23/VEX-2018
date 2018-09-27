@@ -22,6 +22,7 @@ task main()
 		motor[bLeft] = vexRT[Ch3];
 		motor[bRight] = vexRT[Ch2];
 
+		void[] motor = fLeft, fRight, bLeft, bRight;
 
 /*
 		//6U - Launcher
