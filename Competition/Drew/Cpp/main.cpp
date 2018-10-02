@@ -23,11 +23,13 @@ void autonomous() {
 void drivercontrol() {
     while (true) {
         
-        p_lDrive.spin(directionType::undefined, arcade_drive(drive_controller, false), vex::pct);
-        p_rDrive.spin(directionType::undefined, arcade_drive(drive_controller, true), vex::pct);
+        p_lDrive.spin(directionType::fwd, arcade_drive(drive_controller, false), vex::velocityUnits::pct);
+        p_rDrive.spin(directionType::fwd, arcade_drive(drive_controller, true), vex::velocityUnits::pct);
         
         if(piston_controller.ButtonA.pressing()) {
             p_piston.spin(directionType::fwd); // NOTE: Would this always spin after being called once?
+        } else {
+            p_piston.stop();
         }
         
     }
