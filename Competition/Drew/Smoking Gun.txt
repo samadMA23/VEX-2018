@@ -1,0 +1,16 @@
+Current competition plan
+--------------------------
+
+Programming:
+Expected V5 Shipment is after our first competition,
+use ROBOTC during that time; while we're doing this 
+I will still port code over to C++ so the transition
+will be easier later.
+
+Robot:
+Piston is main scoring device, connected to the elevator.
+The elevator sends to piston, which is connected to a feeder wheel.
+The feeder wheel should be very fast, so a low gear ratio.
+(Most likely will be 6:1 when V5 motors ship)
+Using 393's now but the transistion to only 8 V5 motors will NEED
+redesign of the robot, lots of gears and Y's required!
