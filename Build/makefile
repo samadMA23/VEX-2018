@@ -8,11 +8,11 @@ LINK    = ld
 
 CFLAGS    = -target thumbv7-none-eabi -fshort-enums -Wno-unknown-attributes -march=armv7-a -mfpu=neon -mfloat-abi=softfp -v -Os -Werror=return-type -Wall -ansi -std=gnu99 -DVexV5
 CXX_FLAGS = -target thumbv7-none-eabi -fshort-enums -Wno-unknown-attributes -march=armv7-a -mfpu=neon -mfloat-abi=softfp -v -Os -Werror=return-type -Wall -D_LIBCPP_HAS_NO_EXCEPTIONS -D_LIBCPP_HAS_NO_THREADS -std=c++1y -nostdinc++ -fno-rtti -fno-threadsafe-statics -fno-exceptions  -std=gnu++11 -ffunction-sections -fdata-sections -DVexV5
-LNK_FLAGS = -v -nostdlib -T /vexv5/lscript.ld -R /vexv5/stdlib_0.lib  --gc-sections -L/vexv5
+LNK_FLAGS = -v -nostdlib -T /vexv5/lscript.ld -R /vexv5/stdlib_0.lib  --gc-sections -L/vexv5 -L/gcc/libs
 
 LIBS =  --start-group -lv5rt -lc -lm -lgcc --end-group
 
-INC = -I. -I/vexv5/include
+INC = -I. -I/clang/5.0.0/include -I/vexv5/include -Igcc/include -Igcc/include/c++/5.0.0
 cxx_bin: cxx.bin
 
 cxx.o: cxx_entry.cpp

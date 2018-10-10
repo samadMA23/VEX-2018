@@ -10,9 +10,9 @@ matrix:
             sources:
               - ubuntu-toolchain-r-test
             packages:
-              - g++-4.9.3
+              - g++-5
         env:
-          - MATRIX_EVAL="CC=gcc-4.9.3 && CXX=g++-4.9.3"
+          - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
 
 
       #Clang
@@ -22,9 +22,9 @@ matrix:
             sources:
               - llvm-toolchain-trusty-5.0
             packages:
-              - clang-7.0
+              - clang-5.0
         env:
-          - MATRIX_EVAL="CC=clang-7.0 && CXX=clang++-7.0"
+          - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
 
 before_install:
     - eval "${MATRIX_EVAL}"
