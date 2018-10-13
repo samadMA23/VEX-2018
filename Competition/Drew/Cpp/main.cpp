@@ -1,13 +1,13 @@
 #include "robot-config.h"
 using namespace vex;
 
-// Saw this on the VEX examples website, but I'm pretty sure this makes the robot do arcade drive
-double arcade_drive(vex::controller c_controller, bool reversed) { 
-    if(reversed)
-        return (c_controller.Axis3.value() + c_controller.Axis4.value()) / 2;
-    else
-        return (c_controller.Axis3.value() - c_controller.Axis4.value()) / 2;
+inline double arcade_drive(vex::controller c_controller, bool reversed) { 
+        if(reversed)
+            return (c_controller.Axis3.value() + c_controller.Axis4.value()) / 2;
+        else
+            return (c_controller.Axis3.value() - c_controller.Axis4.value()) / 2;
 }
+
 
 void pre_auton() {
     // All activities that occur before competition start
@@ -21,14 +21,27 @@ void autonomous() {
 }
 
 void drivercontrol() {
-    while (true) {
-        
+    bool lift = false, firing = false;
+    while (true) {  
         p_lDrive.spin(directionType::fwd, arcade_drive(drive_controller, false), vex::velocityUnits::pct);
         p_rDrive.spin(directionType::fwd, arcade_drive(drive_controller, true), vex::velocityUnits::pct);
+        p_pistonAdjuster.spin(directionType::fwd, piston_controller.Axis1.value(), vex::velocityUnits::pct);
         
-        if(piston_controller.ButtonA.pressing()) {
-            p_piston.spin(directionType::fwd); // NOTE: Would this always spin after being called once?
-        } else {
+        // Toggle lift
+        if(piston_controller.ButtonA.pressed()){
+            lift = !lift;
+        }else if(lift) {
+            p_elevator.spin(directionType::fwd, 100, velocityUnits::pct);
+        }else if(!lift){
+            p_elevator.stop();
+        }
+        
+        // Toggle piston firing
+        if(piston_controller.ButtonB.pressed()) {
+            firing = !firing;
+        }else if(firing){
+            p_piston.spin(directionType::fwd, 100, velocityUnits::pct);
+        }else if(!firing){
             p_piston.stop();
         }
         
