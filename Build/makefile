@@ -12,7 +12,7 @@ LNK_FLAGS = -v -nostdlib -T Build/lscript.ld -R Build/stdlib_0.lib  --gc-section
 
 LIBS =  --start-group -lv5rt -lc -lm -lgcc -lc++ --end-group
 
-INC = -I. -IBuild/clang/7.0.0/include -IBuild/vexv5/include -IBuild/vexv5/gcc/include -IBuild/vexv5/gcc/include/c++/4.9.3  -IBuild/vexv5/gcc/include/c++/4.9.3/arm-none-eabi/armv7-ar/thumb
+INC = -I. -I/clang/7.0.0/include -IBuild/vexv5/include -I/gcc/include -I/gcc/include/c++/4.9.3  -I/gcc/include/c++/4.9.3/arm-none-eabi/armv7-ar/thumb
 cxx_bin: cxx.bin
 
 cxx.o: cxx_entry.cpp
@@ -23,6 +23,17 @@ cxx.bin: cxx.elf
 
 cxx.elf: cxx.o
 	$(LINK) $(LNK_FLAGS) cxx.o $(LIBS) -o cxx.elf
+
+	cxx_bin: cxx.bin
+
+main.o: main.cpp
+	$(CXX) $(CXX_FLAGS) $(INC) -c ../Competition/Drew/Cpp/main.cpp -o main.o
+	
+main.bin: main.elf
+	$(OBJCOPY) -O binary ../Competition/Drew/Cpp/main.elf ../Competition/Drew/Cpp/main.bin
+
+main.elf: main.o
+	$(LINK) $(LNK_FLAGS) ../Competition/Drew/Cpp/main.o $(LIBS) -o ../Competition/Drew/Cpp/main.elf
 
 
 clean:
