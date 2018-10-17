@@ -1,3 +1,4 @@
+#pragma config(Sensor, in1,    piston_tracker, sensorPotentiometer)
 #pragma config(Motor,  port1,           dBackRight,    tmotorVex393_HBridge, openLoop, reversed)
 #pragma config(Motor,  port2,           dBackLeft,     tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port3,           dFrontRight,   tmotorVex393_MC29, openLoop, reversed)
@@ -46,6 +47,7 @@ task usercontrol()
 	while(true)
 	{
 		mapJoystick();
+		writeDebugStreamLine("Piston State: %f\n", (float)SensorValue[piston_tracker]);
 		motor[piston] = 127;
 	}
 }
