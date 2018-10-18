@@ -21,7 +21,6 @@ void pre_auton()
 {
 	bDisplayCompetitionStatusOnLcd = false;
 	bStopTasksBetweenModes = true;
-
 	if(false) { //Putting these here so no compile warnings
 		dualJoystick();
 		moveForward(0, 0);
@@ -34,6 +33,7 @@ void pre_auton()
 		leftSpin(0, 0);
 		feedBall(0);
 		fireBall();
+		getPiston();
 	}
 }
 
@@ -47,7 +47,5 @@ task usercontrol()
 	while(true)
 	{
 		mapJoystick();
-		writeDebugStreamLine("Piston State: %f\n", (float)SensorValue[piston_tracker]);
-		motor[piston] = 127;
 	}
 }

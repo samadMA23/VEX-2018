@@ -113,3 +113,7 @@ bool fireBall()
 
 	return true; // Shot completed successfully
 }
+
+short getPiston() {
+	return SensorValue[piston_tracker];
+}
