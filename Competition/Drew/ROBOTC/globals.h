@@ -19,5 +19,4 @@ typedef enum LIFT_STATES {
 } Liftstate;
 
 Liftstate	mainLift = STOPPED;
-
 #endif /* GLOBALS */

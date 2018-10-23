@@ -7,36 +7,35 @@ namespace auto {
 		p_rDrive.stop();
 	}
 
-	void AutoFunctions::moveForward(float time, velocityUnits::pct){
-		p_lDrive.stop();
-		wait1Msec(time);
+	void AutoFunctions::moveForward(int time, velocityUnits::pct speed){
+		p_lDrive.spin(vex::directionType::fwd, speed, vex::velocityUnits::pct);
+		p_rDrive.spin(vex::directionType::fwd, speed, vex::velocityUnits::pct);
+		task::sleep(time);
 		stopDrive();
 	}
 
-	void AutoFunctions::moveBackward(float time, velocityUnits::pct){
-		motor[dBackRight] = speed *-1;
-		motor[dBackLeft] = speed *-1;
-		motor[dFrontLeft] = speed *-1;
-		motor[dFrontRight] = speed *-1;
-		wait1Msec(time);
+	void AutoFunctions::moveBackward(int time, int speed){
+		p_lDrive.spin(vex::directionType::rev, speed, vex::velocityUnits::pct);
+		p_rDrive.spin(vex::directionType::rev, speed, vex::velocityUnits::pct);
+		Task.sleep(time);
 		stopDrive();
 	}
 
-	void AutoFunctions::leftTurn(float time, velocityUnits::pct){
-		motor[dBackRight] = speed;
+	void AutoFunctions::leftTurn(int time, int speed){
+		p_lDrive.
 		motor[dFrontRight] = speed;
 		wait1Msec(time);
 		stopDrive();
 	}
 
-	void AutoFunctions::rightTurn(float time, int speed){
+	void AutoFunctions::rightTurn(int time, int speed){
 		motor[dBackLeft] = speed;
 		motor[dFrontLeft] = speed;
 		wait1Msec(time);
 		stopDrive();
 	}
 
-	void AutoFunctions::leftSpin(float time, int speed){
+	void AutoFunctions::leftSpin(int time, int speed){
 		motor[dFrontRight] = speed;
 		motor[dBackRight] = speed;
 		motor[dBackLeft] = speed *-1;
@@ -45,7 +44,7 @@ namespace auto {
 		stopDrive();
 	}
 
-	void AutoFunctions::rightSpin(float time, int speed){
+	void AutoFunctions::rightSpin(int time, int speed){
 		motor[dFrontRight] = speed *-1;
 		motor[dBackRight] = speed *-1;
 		motor[dBackLeft] = speed;
@@ -54,7 +53,7 @@ namespace auto {
 		stopDrive();
 	}
 
-	void AutoFunctions::rightVeer(float time, int speed, int offset) {
+	void AutoFunctions::rightVeer(int time, int speed, int offset) {
 		motor[dBackLeft] = speed;
 		motor[dFrontLeft] = speed;
 		motor[dBackRight] = (speed *-1) - offset;
@@ -63,7 +62,7 @@ namespace auto {
 		stopDrive();
 	}
 
-	void AutoFunctions::leftVeer(float time, int speed, int offset) {
+	void AutoFunctions::leftVeer(int time, int speed, int offset) {
 		motor[dBackRight] = speed;
 		motor[dFrontRight] = speed;
 		motor[dBackLeft] = (speed *-1) - offset;
@@ -72,7 +71,7 @@ namespace auto {
 		stopDrive();
 	}
 
-	void AutoFunctions::feedBall(float time)
+	void AutoFunctions::feedBall(int time)
 	{
 		mainLift = STARTED;
 		motor[lift] = MAX_SPEED;
