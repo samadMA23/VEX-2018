@@ -1,11 +1,29 @@
 #include "robot-config.h"
+#include "stdlib.h"
 
-namespace auto {
+using namespace vex;
+
+namespace auton {
+    typedef enum LIFT_STATES {
+            STOPPED,
+            STARTED,
+            READY
+        } LiftState;
+    
     class AutoFunctions {
+        private:
+        bool stopBetweenFunctions = true;
+        const double PISTON_LENGTH = 1500;
+        LiftState mainLift = STOPPED;
+        
         public:
-        void stopRobot();
+        LiftState getLiftState();
+        void setLiftState(LiftState newState);
+        void stopDrive();
         void moveForward(uint32_t time, double speed);
         void moveBackward(uint32_t time, double speed);
+        void rightTurn(uint32_t time, double speed);
+        void leftTurn(uint32_t time, double speed);
         void leftSpin(uint32_t time, double speed); 
         void rightSpin(uint32_t time, double speed);
         void rightVeer(uint32_t time, double speed, double o);
@@ -13,17 +31,15 @@ namespace auto {
         void feedBall(uint32_t time);
         bool fireBall();
         
-        private:
-        bool stopBetweenFunctions = true;
-
-        private enum LIFT_STATES {
-            STOPPED,
-            STARTED,
-            READY
-        };
-        
     }; extern AutoFunctions functions;
 
+    LiftState AutoFunctions::getLiftState(){
+        return mainLift;
+    }
+    
+    void AutoFunctions::setLiftState(LiftState newState){
+        mainLift = newState;
+    }
 
     void AutoFunctions::stopDrive(){
         p_lDrive.stop();
@@ -72,7 +88,7 @@ namespace auto {
 
     void AutoFunctions::rightVeer(uint32_t time, double speed, double o){
         p_lDrive.spin(directionType::fwd, speed, velocityUnits::pct);
-        p_rDrive.spin(directionType::rev, speed - o, velocityUnits::pct)
+        p_rDrive.spin(directionType::rev, speed - o, velocityUnits::pct);
         task::sleep(time);
         if(stopBetweenFunctions) stopDrive();
     }
@@ -85,16 +101,16 @@ namespace auto {
     }
 
     void AutoFunctions::feedBall(uint32_t time){
-        mainLift = STARTED;
+        setLiftState(STARTED);
         p_elevator.spin(directionType::fwd, 100, velocityUnits::pct);
         task::sleep(time);
-        mainLift = READY; // Assuming ball has fed into the piston
+        setLiftState(READY); // Assuming ball has fed into the piston
         // TODO: Add actual way to check we have a ball (HW & SW)
         p_elevator.stop();
     }
 
     bool AutoFunctions::fireBall(){
-        if(mainLift != READY)
+        if(getLiftState() != READY)
             return false; // Ball shot failed, we return false
         // We want the ball to be fed first
 
@@ -105,7 +121,7 @@ namespace auto {
         task::sleep(PISTON_LENGTH); // Placeholder for time
         p_piston.stop();
 
-        mainLift = STOPPED; // Reset lift for next shot
+        setLiftState(STOPPED); // Reset lift for next shot
 
         return true; // Shot completed successfully
     }
@@ -118,6 +134,16 @@ namespace drive {
         bool firing = false;
         
         public:
+        void mapJoystick();
+        
+        void toggleLift(){
+            lift = !lift;
+        }
+        
+        void toggleFire(){
+            firing = !firing;
+        }
+        
         inline bool getLiftState(){
             return lift;
         }
@@ -127,7 +153,7 @@ namespace drive {
         }
         
         inline double arcade_drive(vex::controller c_controller, bool positive) {
-            if(reversed)
+            if(positive)
                 return (c_controller.Axis3.value() + c_controller.Axis4.value()) / 2;
             else
                 return (c_controller.Axis3.value() - c_controller.Axis4.value()) / 2;
@@ -139,21 +165,11 @@ namespace drive {
         p_rDrive.spin(directionType::fwd, drive::functions.arcade_drive(drive_controller, true), vex::velocityUnits::pct);
         p_pistonAdjuster.spin(directionType::fwd, piston_controller.Axis1.value(), vex::velocityUnits::pct);
         
-        if(piston_controller.ButtonA.pressed()){
-            lift = !lift;
-        }else if(lift) {
-            p_elevator.spin(directionType::fwd, 100, velocityUnits::pct);
-        }else if(!lift){
-            p_elevator.stop();
-        }
+        piston_controller.ButtonA.pressed(functions.toggleLift());
+        piston_controller.ButtonB.pressed(functions.toggleFire());
         
-        if(piston_controller.ButtonB.pressed()) {
-            firing = !firing;
-        }else if(firing){
-            p_piston.spin(directionType::fwd, 100, velocityUnits::pct);
-        }else if(!firing){
-            p_piston.stop();
-        }
+        getLiftState() ? p_elevator.spin(directionType::fwd, 100, velocityUnits::pct) : p_elevator.stop();
+        getFireState() ? p_piston.spin(directionType::fwd, 100, velocityUnits::pct) : p_piston.stop();
     }
 };
 

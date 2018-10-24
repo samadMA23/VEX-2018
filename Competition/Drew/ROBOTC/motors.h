@@ -30,7 +30,7 @@ void mapJoystick() {
 	singleJoystick(); //single joystick control
 
 	//Toggle lift
-	if(vexRT[Btn7LXmtr2] == 1) { // For testing purposes, setting to main controller
+	if(vexRT[Btn7LXmtr2] == 1) {
 		liftOn = !liftOn;
 		}else if(liftOn){
 		motor[lift] = MAX_SPEED;
@@ -44,7 +44,7 @@ void mapJoystick() {
 	if(vexRT[Btn7RXmtr2] == 1){
 		firing = !firing;
 		}else if(firing){
-		motor[piston] = MAX_SPEED;
+		motor[piston] = 100;
 		}else if(!firing){
 		motor[piston] = NO_SPEED;
 	}
