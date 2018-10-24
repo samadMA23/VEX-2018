@@ -1,3 +1,4 @@
+#include "../../../Build/vexv5/include/v5.h" // NOTE: This is here for the VSCode to find the vex namespace
 #include "robot-config.h"
 using namespace vex;
 

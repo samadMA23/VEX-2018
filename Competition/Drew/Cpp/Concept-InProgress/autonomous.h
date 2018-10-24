@@ -5,17 +5,26 @@ using namespace vex;
 namespace auto {
     class AutoFunctions {
         public:
-            void stopRobot();
-            void moveForward(float time, velocityUnits::pct speed);
-            void moveBackward(float time, velocityUnits::pct speed);
-            void leftSpin(float time, velocityUnits::pct speed); 
-            void rightSpin(float time, velocityUnits::pct speed);
-            void rightVeer(float time, velocityUnits::pct speed, int o);
-            void leftVeer(float time, velocityUnits::pct speed, int o);
-            void feedBall(float time);
-            bool fireBall();
+        void stopRobot();
+        void moveForward(uint32_t time, double speed);
+        void moveBackward(uint32_t time, double speed);
+        void leftSpin(uint32_t time, double speed); 
+        void rightSpin(uint32_t time, double speed);
+        void rightVeer(uint32_t time, double speed, double o);
+        void leftVeer(uint32_t time, double speed, double o);
+        void feedBall(uint32_t time);
+        bool fireBall();
+        
+        private:
+        bool stopBetweenFunctions = true;
 
-    } extern AutoFunctions functions;
+        private enum LIFT_STATES {
+            STOPPED,
+            STARTED,
+            READY
+        };
+        
+    }; extern AutoFunctions functions;
 
     enum class LIFT_STATES {
         STOPPED,

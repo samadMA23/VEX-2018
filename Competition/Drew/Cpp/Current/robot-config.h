@@ -1,5 +1,6 @@
 #ifndef ROBOT_CONFIG_H_
 #define ROBOT_CONFIG_H_
+#include "../../../Build/vexv5/include/v5.h" // NOTE: This is here for the VSCode to find the vex namespace
 using namespace vex;
 
 vex::brain Brain;

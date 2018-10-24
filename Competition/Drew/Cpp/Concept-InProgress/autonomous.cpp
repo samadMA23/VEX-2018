@@ -1,106 +1,90 @@
 #include "autonomous.h"
+#include "../Current/robot-config.h"
 #include "../../../Build/vexv5/include/v5.h"
 
-namespace auto {
-	void AutoFunctions::stopDrive(){
-		p_lDrive.stop();
-		p_rDrive.stop();
-	}
+using namespace vex;
 
-	void AutoFunctions::moveForward(int time, velocityUnits::pct speed){
-		p_lDrive.spin(vex::directionType::fwd, speed, vex::velocityUnits::pct);
-		p_rDrive.spin(vex::directionType::fwd, speed, vex::velocityUnits::pct);
-		task::sleep(time);
-		stopDrive();
-	}
+void AutoFunctions::stopDrive(){
+	p_lDrive.stop();
+	p_rDrive.stop();
+}
 
-	void AutoFunctions::moveBackward(int time, int speed){
-		p_lDrive.spin(vex::directionType::rev, speed, vex::velocityUnits::pct);
-		p_rDrive.spin(vex::directionType::rev, speed, vex::velocityUnits::pct);
-		Task.sleep(time);
-		stopDrive();
-	}
+void AutoFunctions::moveForward(uint32_t time, double speed){
+	p_lDrive.spin(vex::directionType::fwd, speed, vex::velocityUnits::pct);
+	p_rDrive.spin(vex::directionType::fwd, speed, vex::velocityUnits::pct);
+	task::sleep(time); 
+	if(stopBetweenFunctions) stopDrive();
+}
 
-	void AutoFunctions::leftTurn(int time, int speed){
-		p_lDrive.
-		motor[dFrontRight] = speed;
-		wait1Msec(time);
-		stopDrive();
-	}
+void AutoFunctions::moveBackward(uint32_t time, double speed){
+	p_lDrive.spin(vex::directionType::rev, speed, vex::velocityUnits::pct);
+	p_rDrive.spin(vex::directionType::rev, speed, vex::velocityUnits::pct);
+	task::sleep(time);
+	if(stopBetweenFunctions) stopDrive();
+}
 
-	void AutoFunctions::rightTurn(int time, int speed){
-		motor[dBackLeft] = speed;
-		motor[dFrontLeft] = speed;
-		wait1Msec(time);
-		stopDrive();
-	}
+void AutoFunctions::leftTurn(uint32_t time, double speed){
+	p_lDrive.spin(directionType::fwd, speed, velocityUnits::pct);
+	task::sleep(time);
+	if(stopBetweenFunctions) stopDrive();
+}
 
-	void AutoFunctions::leftSpin(int time, int speed){
-		motor[dFrontRight] = speed;
-		motor[dBackRight] = speed;
-		motor[dBackLeft] = speed *-1;
-		motor[dFrontLeft] = speed *-1;
-		wait1Msec(time);
-		stopDrive();
-	}
+void AutoFunctions::rightTurn(uint32_t time, double speed){
+	p_rDrive.spin(directionType::fwd, speed, velocityUnits::pct);
+	task::sleep(time);
+	if(stopBetweenFunctions) stopDrive();
+}
 
-	void AutoFunctions::rightSpin(int time, int speed){
-		motor[dFrontRight] = speed *-1;
-		motor[dBackRight] = speed *-1;
-		motor[dBackLeft] = speed;
-		motor[dFrontLeft] = speed;
-		wait1Msec(time);
-		stopDrive();
-	}
+void AutoFunctions::leftSpin(uint32_t time, double speed){
+	p_lDrive.spin(directionType::rev, speed, velocityUnits::pct);
+	p_rDrive.spin(directionType::fwd, speed, velocityUnits::pct);
+	task::sleep(time);
+	if(stopBetweenFunctions) stopDrive();
+}
 
-	void AutoFunctions::rightVeer(int time, int speed, int offset) {
-		motor[dBackLeft] = speed;
-		motor[dFrontLeft] = speed;
-		motor[dBackRight] = (speed *-1) - offset;
-		motor[dFrontRight] = (speed *-1) - offset;
-		wait1Msec(time);
-		stopDrive();
-	}
+void AutoFunctions::rightSpin(uint32_t time, double speed){
+	p_lDrive.spin(directionType::fwd, speed, velocityUnits::pct);
+	p_rDrive.spin(directionType::rev, speed, velocityUnits::pct);
+	task::sleep(time);
+	if(stopBetweenFunctions) stopDrive();
+}
 
-	void AutoFunctions::leftVeer(int time, int speed, int offset) {
-		motor[dBackRight] = speed;
-		motor[dFrontRight] = speed;
-		motor[dBackLeft] = (speed *-1) - offset;
-		motor[dFrontLeft] = (speed *-1) - offset;
-		wait1Msec(time);
-		stopDrive();
-	}
+void AutoFunctions::rightVeer(uint32_t time, double speed, double o){
+	p_lDrive.spin(directionType::fwd, speed, velocityUnits::pct);
+	p_rDrive.spin(directionType::rev, speed - o, velocityUnits::pct)
+	task::sleep(time);
+	if(stopBetweenFunctions) stopDrive();
+}
 
-	void AutoFunctions::feedBall(int time)
-	{
-		mainLift = STARTED;
-		motor[lift] = MAX_SPEED;
-		wait1Msec(time);
-		mainLift = READY; // Assuming ball has fed into the piston
-										// TODO: Add actual way to check we have a ball (HW & SW)
-		motor[lift] = NO_SPEED;
-	}
+void AutoFunctions::leftVeer(uint32_t time, double speed, double o){
+	p_lDrive.spin(directionType::rev, speed - o, velocityUnits::pct);
+	p_rDrive.spin(directionType::fwd, speed, velocityUnits::pct);
+	task::sleep(time);
+	if(stopBetweenFunctions) stopDrive();
+}
 
-	bool AutoFunctions::fireBall()
-	{
-		if(mainLift != READY)
-			return false; // Ball shot failed, we return false
-										// We want the ball to be fed first
+void AutoFunctions::feedBall(uint32_t time){
+	mainLift = STARTED;
+	p_elevator.spin(directionType::fwd, 100, velocityUnits::pct);
+	task::sleep(time);
+	mainLift = READY; // Assuming ball has fed into the piston
+	// TODO: Add actual way to check we have a ball (HW & SW)
+	p_elevator.stop();
+}
 
-		// TODO: Add adjustment function for angle of shot
-		// adjustAngle(position);
+bool AutoFunctions::fireBall(){
+	if(mainLift != READY)
+		return false; // Ball shot failed, we return false
+	// We want the ball to be fed first
 
-		motor[piston] = MAX_SPEED;
-		wait1Msec(PISTON_LENGTH); // Placeholder for time
-		motor[piston] = NO_SPEED;
+	// TODO: Add adjustment function for angle of shot
+	// adjustAngle(position);
 
-		mainLift = STOPPED; // Reset lift for next shot
+	p_piston.spin(directionType::fwd, 100, velocityUnits::pct);
+	task::sleep(PISTON_LENGTH); // Placeholder for time
+	p_piston.stop();
 
-		return true; // Shot completed successfully
-	}
+	mainLift = STOPPED; // Reset lift for next shot
 
-	short getPiston() {
-		return SensorValue[piston_tracker];
-	}
-
+	return true; // Shot completed successfully
 }

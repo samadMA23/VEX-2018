@@ -13,13 +13,16 @@ namespace auto {
         void feedBall(uint32_t time);
         bool fireBall();
         
+        private:
+        bool stopBetweenFunctions = true;
+
         private enum LIFT_STATES {
             STOPPED,
             STARTED,
             READY
         };
         
-    } extern AutoFunctions functions;
+    }; extern AutoFunctions functions;
 
 
     void AutoFunctions::stopDrive(){
@@ -30,55 +33,55 @@ namespace auto {
     void AutoFunctions::moveForward(uint32_t time, double speed){
         p_lDrive.spin(vex::directionType::fwd, speed, vex::velocityUnits::pct);
         p_rDrive.spin(vex::directionType::fwd, speed, vex::velocityUnits::pct);
-        task::sleep(time);
-        stopDrive();
+        task::sleep(time); 
+        if(stopBetweenFunctions) stopDrive();
     }
 
     void AutoFunctions::moveBackward(uint32_t time, double speed){
         p_lDrive.spin(vex::directionType::rev, speed, vex::velocityUnits::pct);
         p_rDrive.spin(vex::directionType::rev, speed, vex::velocityUnits::pct);
         task::sleep(time);
-        stopDrive();
+        if(stopBetweenFunctions) stopDrive();
     }
 
     void AutoFunctions::leftTurn(uint32_t time, double speed){
         p_lDrive.spin(directionType::fwd, speed, velocityUnits::pct);
         task::sleep(time);
-        stopDrive();
+        if(stopBetweenFunctions) stopDrive();
     }
 
     void AutoFunctions::rightTurn(uint32_t time, double speed){
         p_rDrive.spin(directionType::fwd, speed, velocityUnits::pct);
         task::sleep(time);
-        stopDrive();
+        if(stopBetweenFunctions) stopDrive();
     }
 
     void AutoFunctions::leftSpin(uint32_t time, double speed){
         p_lDrive.spin(directionType::rev, speed, velocityUnits::pct);
         p_rDrive.spin(directionType::fwd, speed, velocityUnits::pct);
         task::sleep(time);
-        stopDrive();
+        if(stopBetweenFunctions) stopDrive();
     }
 
     void AutoFunctions::rightSpin(uint32_t time, double speed){
         p_lDrive.spin(directionType::fwd, speed, velocityUnits::pct);
         p_rDrive.spin(directionType::rev, speed, velocityUnits::pct);
         task::sleep(time);
-        stopDrive();
+        if(stopBetweenFunctions) stopDrive();
     }
 
     void AutoFunctions::rightVeer(uint32_t time, double speed, double o){
         p_lDrive.spin(directionType::fwd, speed, velocityUnits::pct);
         p_rDrive.spin(directionType::rev, speed - o, velocityUnits::pct)
         task::sleep(time);
-        stopDrive();
+        if(stopBetweenFunctions) stopDrive();
     }
 
     void AutoFunctions::leftVeer(uint32_t time, double speed, double o){
         p_lDrive.spin(directionType::rev, speed - o, velocityUnits::pct);
         p_rDrive.spin(directionType::fwd, speed, velocityUnits::pct);
         task::sleep(time);
-        stopDrive();
+        if(stopBetweenFunctions) stopDrive();
     }
 
     void AutoFunctions::feedBall(uint32_t time){
