@@ -1,7 +1,7 @@
-#pragma config(Motor,  port1,           dBackRight,    tmotorVex393_HBridge, openLoop, reversed)
-#pragma config(Motor,  port2,           dBackLeft,     tmotorVex393_MC29, openLoop)
-#pragma config(Motor,  port3,           dFrontRight,   tmotorVex393_MC29, openLoop, reversed)
-#pragma config(Motor,  port4,           dFrontLeft,    tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port1,           dBackRight,    tmotorVex393TurboSpeed_HBridge, openLoop, reversed)
+#pragma config(Motor,  port2,           dBackLeft,     tmotorVex393TurboSpeed_MC29, openLoop)
+#pragma config(Motor,  port3,           dFrontRight,   tmotorVex393TurboSpeed_MC29, openLoop, reversed)
+#pragma config(Motor,  port4,           dFrontLeft,    tmotorVex393TurboSpeed_MC29, openLoop)
 #pragma config(Motor,  port5,           intake,        tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port6,           lift,          tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port8,           piston,        tmotorVex393_MC29, openLoop, reversed)
@@ -20,7 +20,7 @@ void pre_auton()
 	bDisplayCompetitionStatusOnLcd = false;
 	bStopTasksBetweenModes = true;
 	if(false) { //Putting these here so no compile warnings
-		dualJoystick();
+		singleJoystick();
 		moveForward(0, 0);
 		moveBackward(0, 0);
 		leftTurn(0, 0);

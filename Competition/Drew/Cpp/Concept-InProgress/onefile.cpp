@@ -1,5 +1,4 @@
 #include "robot-config.h"
-#include "stdlib.h"
 
 using namespace vex;
 
@@ -13,7 +12,7 @@ namespace auton {
     class AutoFunctions {
         private:
         bool stopBetweenFunctions = true;
-        const double PISTON_LENGTH = 1500;
+        const uint32_t PISTON_LENGTH = 1500;
         LiftState mainLift = STOPPED;
         
         public:
@@ -132,26 +131,26 @@ namespace drive {
         private:
         bool lift   = false;
         bool firing = false;
-        
+
         public:
         void mapJoystick();
-        
+
         void toggleLift(){
             lift = !lift;
         }
-        
+
         void toggleFire(){
             firing = !firing;
         }
-        
+
         inline bool getLiftState(){
             return lift;
         }
-        
+
         inline bool getFireState(){
             return firing;
         }
-        
+
         inline double arcade_drive(vex::controller c_controller, bool positive) {
             if(positive)
                 return (c_controller.Axis3.value() + c_controller.Axis4.value()) / 2;
@@ -159,20 +158,21 @@ namespace drive {
                 return (c_controller.Axis3.value() - c_controller.Axis4.value()) / 2;
         }
     }; extern DriveFunctions functions;
-    
+
     void DriveFunctions::mapJoystick() {
         p_lDrive.spin(directionType::fwd, drive::functions.arcade_drive(drive_controller, false), vex::velocityUnits::pct);
         p_rDrive.spin(directionType::fwd, drive::functions.arcade_drive(drive_controller, true), vex::velocityUnits::pct);
         p_pistonAdjuster.spin(directionType::fwd, piston_controller.Axis1.value(), vex::velocityUnits::pct);
-        
-        piston_controller.ButtonA.pressed(functions.toggleLift());
-        piston_controller.ButtonB.pressed(functions.toggleFire());
-        
+
+        if(piston_controller.ButtonA.pressing()) functions.toggleLift();
+        if(piston_controller.ButtonB.pressing()) functions.toggleFire();
+
         getLiftState() ? p_elevator.spin(directionType::fwd, 100, velocityUnits::pct) : p_elevator.stop();
         getFireState() ? p_piston.spin(directionType::fwd, 100, velocityUnits::pct) : p_piston.stop();
-    }
-};
-
+        }
+}
+                                          
+                                         
 void pre_auton() {
     // All activities that occur before competition start
     // Example: setting initial positions
@@ -195,4 +195,5 @@ int main() {
     
     pre_auton();
 
+    return 0;
 }

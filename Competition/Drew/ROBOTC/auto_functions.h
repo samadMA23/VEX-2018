@@ -1,7 +1,7 @@
-#pragma config(Motor,  port1,           dBackRight,    tmotorVex393_HBridge, openLoop, reversed)
-#pragma config(Motor,  port2,           dBackLeft,     tmotorVex393_MC29, openLoop)
-#pragma config(Motor,  port3,           dFrontRight,   tmotorVex393_MC29, openLoop, reversed)
-#pragma config(Motor,  port4,           dFrontLeft,    tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port1,           dBackRight,    tmotorVex393TurboSpeed_HBridge, openLoop, reversed)
+#pragma config(Motor,  port2,           dBackLeft,     tmotorVex393TurboSpeed_MC29, openLoop)
+#pragma config(Motor,  port3,           dFrontRight,   tmotorVex393TurboSpeed_MC29, openLoop, reversed)
+#pragma config(Motor,  port4,           dFrontLeft,    tmotorVex393TurboSpeed_MC29, openLoop)
 #pragma config(Motor,  port5,           intake,        tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port6,           lift,          tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port8,           piston,        tmotorVex393_MC29, openLoop, reversed)
@@ -89,7 +89,7 @@ void feedBall(float time)
 	motor[lift] = MAX_SPEED;
 	wait1Msec(time);
 	mainLift = READY; // Assuming ball has fed into the piston
-									 // TODO: Add actual way to check we have a ball (HW & SW)
+	// TODO: Add actual way to check we have a ball (HW & SW)
 	motor[lift] = NO_SPEED;
 }
 
@@ -97,7 +97,7 @@ bool fireBall()
 {
 	if(mainLift != READY)
 		return false; // Ball shot failed, we return false
-									// We want the ball to be fed first
+	// We want the ball to be fed first
 
 	// TODO: Add adjustment function for angle of shot
 	// adjustAngle(position);
