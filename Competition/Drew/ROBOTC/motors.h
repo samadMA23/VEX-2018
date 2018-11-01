@@ -25,27 +25,20 @@ void dualJoystick() {
 }
 
 void mapJoystick() {
-
 	dualJoystick(); //dual joystick control
 
-	//Toggle lift
-	if(vexRT[Btn7LXmtr2] == 1) {
-		liftOn = !liftOn;
-		}else if(liftOn){
+	if(vexRT[Btn7L] == 1){
 		motor[lift] = MAX_SPEED;
 		motor[intake] = MAX_SPEED;
-		}else if(!liftOn){
+	}else {
 		motor[lift] = NO_SPEED;
 		motor[intake] = NO_SPEED;
 	}
 
-	//Toogle piston
-	if(vexRT[Btn7RXmtr2] == 1){
-		firing = !firing;
-		}else if(firing){
+	if(vexRT[Btn7R] == 1){
 		motor[pistonRight] = MAX_SPEED;
 		motor[pistonLeft] = MAX_SPEED;
-		}else if(!firing){
+	}else{
 		motor[pistonRight] = NO_SPEED;
 		motor[pistonLeft] = NO_SPEED;
 	}
