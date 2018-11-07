@@ -28,8 +28,7 @@ namespace auton {
         void rightVeer(uint32_t time, double speed, double o);
         void leftVeer(uint32_t time, double speed, double o);
         void feedBall(uint32_t time);
-        bool fireBall();
-        
+        bool fireBall();   
     }; extern AutoFunctions functions;
 
     LiftState AutoFunctions::getLiftState(){
@@ -109,19 +108,15 @@ namespace auton {
     }
 
     bool AutoFunctions::fireBall(){
-        if(getLiftState() != READY)
-            return false; // Ball shot failed, we return false
-        // We want the ball to be fed first
-
+        if(getLiftState() != READY) return false; // Ball shot failed, we return false
+                                                  // We want the ball to be fed first
+                                                  
         // TODO: Add adjustment function for angle of shot
         // adjustAngle(position);
-
         p_piston.spin(directionType::fwd, 100, velocityUnits::pct);
         task::sleep(PISTON_LENGTH); // Placeholder for time
         p_piston.stop();
-
         setLiftState(STOPPED); // Reset lift for next shot
-
         return true; // Shot completed successfully
     }
 };
@@ -176,12 +171,10 @@ namespace drive {
 void pre_auton() {
     // All activities that occur before competition start
     // Example: setting initial positions
-
 }
 
 void autonomous() {
     // Place autonomous code here
-
 }
 
 void drivercontrol() {

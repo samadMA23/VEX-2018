@@ -12,8 +12,9 @@ LNK_FLAGS = -v -nostdlib -T Build/lscript.ld -R Build/stdlib_0.lib  --gc-section
 
 LIBS =  --start-group -lv5rt -lc -lm -lgcc -lc++ --end-group
 
-INC = -I. -I/clang/7.0.0/include -IBuild/vexv5/include -I/gcc/include -I/gcc/include/c++/4.9.3  -I/gcc/include/c++/4.9.3/arm-none-eabi/armv7-ar/thumb
+INC = -I. -IBuild/vexv5/include
 cxx_bin: cxx.bin
+main.bin: onefile.bin
 
 cxx.o: cxx_entry.cpp
 	$(CXX) $(CXX_FLAGS) $(INC) -c cxx_entry.cpp -o cxx.o
@@ -26,15 +27,16 @@ cxx.elf: cxx.o
 
 	cxx_bin: cxx.bin
 
-main.o: main.cpp
-	$(CXX) $(CXX_FLAGS) $(INC) -c ../Competition/Drew/Cpp/main.cpp -o main.o
+main.o: onefile.cpp
+	$(CXX) $(CXX_FLAGS) $(INC) -c ../Competition/Drew/Cpp/Concept-InProgress/onefile.cpp -o onefile.o
 	
-main.bin: main.elf
-	$(OBJCOPY) -O binary ../Competition/Drew/Cpp/main.elf ../Competition/Drew/Cpp/main.bin
+main.bin: onefile.elf
+	$(OBJCOPY) -O binary ../Competition/Drew/Cpp/onefile.elf ../Competition/Drew/Cpp/onefile.bin
 
-main.elf: main.o
-	$(LINK) $(LNK_FLAGS) ../Competition/Drew/Cpp/main.o $(LIBS) -o ../Competition/Drew/Cpp/main.elf
+main.elf: onefile.o
+	$(LINK) $(LNK_FLAGS) ../Competition/Drew/Cpp/onefile.o $(LIBS) -o ../Competition/Drew/Cpp/onefile.elf
 
+	main.bin: onefile.bin
 
 clean:
 	rm *.o
