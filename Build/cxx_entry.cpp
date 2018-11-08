@@ -4,9 +4,9 @@
 #define __INT32_TYPE__ long
 #define __UINT32_TYPE__ unsigned long
 
-#include <stdlib>
-#include <math>
-#include <string>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
 
 #include "vexv5/v5.h"
 #include "vexv5/v5_vcs.h"
