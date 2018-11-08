@@ -120,7 +120,6 @@ namespace MODKIT_IO_NUMBER_NAMESPACE{
     template <typename IntType, typename FloatType>
     class MODKIT_IO_Number{
     public:
-        
         MODKIT_IO_Number(int _n):type(INT),n(_n){ };
         MODKIT_IO_Number(long _l):type(INT),n(_l){ };
         MODKIT_IO_Number(float _f):type(FLOAT),f(_f){if(_isInt(f)){type=INT; n=_getInt<IntType,FloatType>(f);} };
@@ -241,15 +240,12 @@ namespace MODKIT_IO_NUMBER_NAMESPACE{
         MODKIT_IO_Number<IntType,FloatType> operator-();
         
     private:
-        
         Number_Type type;
         union {
             IntType n;
             FloatType f;
-        };
-        
+        }; 
     };
-    
     
 
     

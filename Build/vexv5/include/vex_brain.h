@@ -32,12 +32,10 @@ namespace vex {
     friend class competition;
     
     private:
-
     protected:
       static int32_t _getIndex();
       
     public:
-
     /** 
       * @prog_lang{cpp|pro}
       * @drawer_cat{constructor}

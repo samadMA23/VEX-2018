@@ -320,7 +320,6 @@ namespace vex {
       public:
         __tridevice( triport::port &port, triportType type );
         ~__tridevice();
-
   };
   /** 
     * @prog_lang{block|cpp|pro}
@@ -445,7 +444,6 @@ namespace vex {
   */
   class digital_in : private __tridevice {
       public:
-
         /**
         * @prog_lang{cpp|pro}
         * @drawer_cat{constructor}
@@ -497,7 +495,6 @@ namespace vex {
   */
   class digital_out : private __tridevice {
       public:
-
         /**
         * @prog_lang{cpp|pro}
         * @drawer_cat{constructor}
@@ -545,7 +542,6 @@ namespace vex {
   */
   class pot : private __tridevice {
       public:
-
         /**
         * @prog_lang{cpp|pro}
         * @drawer_cat{constructor}
@@ -607,7 +603,6 @@ namespace vex {
   */  
   class line : private __tridevice {
       public:
-
         /**
         * @prog_lang{cpp|pro}
         * @drawer_cat{constructor}
@@ -657,7 +652,6 @@ namespace vex {
   */  
   class light : private __tridevice {
       public:
-
         /**
         * @prog_lang{cpp|pro}
         * @drawer_cat{constructor}
@@ -708,7 +702,6 @@ namespace vex {
   */
   class gyro : private __tridevice {
       public:
-
         /**
         * @prog_lang{cpp|pro}
         * @drawer_cat{constructor}
@@ -788,7 +781,6 @@ namespace vex {
   */  
   class accelerometer : private __tridevice {
       public:
-
         /**
         * @prog_lang{cpp|pro}
         * @drawer_cat{constructor}
@@ -838,7 +830,6 @@ namespace vex {
   */    
   class analog_in : private __tridevice {
       public:
-
         /**
         * @prog_lang{cpp|pro}
         * @drawer_cat{constructor}
@@ -888,7 +879,6 @@ namespace vex {
   */   
   class encoder : private __tridevice {
       public:
-
         /**
         * @prog_lang{cpp|pro}
         * @drawer_cat{constructor}
@@ -967,7 +957,6 @@ namespace vex {
   */     
   class sonar : private __tridevice {
       public:
-
         /**
         * @prog_lang{cpp|pro}
         * @drawer_cat{constructor}
@@ -1016,7 +1005,6 @@ namespace vex {
   */
   class pwm_out : private __tridevice {
       public:
-
         /**
         * @prog_lang{cpp|pro}
         * @drawer_cat{constructor}
@@ -1044,7 +1032,6 @@ namespace vex {
   */
   class servo : private __tridevice {
       public:
-
         /**
         * @prog_lang{cpp|pro}
         * @drawer_cat{constructor}
@@ -1087,7 +1074,6 @@ namespace vex {
         bool    _spinMode;
 
       public:
-
         /**
         * @prog_lang{cpp|pro}
         * @drawer_cat{constructor}
@@ -1172,7 +1158,6 @@ namespace vex {
         bool    _spinMode;
 
       public:
-
         /**
         * @prog_lang{cpp|pro}
         * @drawer_cat{constructor}
