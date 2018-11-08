@@ -12,7 +12,7 @@ LNK_FLAGS = -v -nostdlib -T lscript.ld -R stdlib_0.lib  --gc-sections -L./vexv5 
 
 LIBS =  --start-group -lv5rt -lc -lm -lgcc -lc++ --end-group
 
-INC = -I. -IBuild/vexv5/include -I/usr/local/clang-5.0.0/lib/clang/5.0.0/include
+INC = -I. -IBuild/vexv5/include -I/usr/local/clang-5.0.0/lib/clang/5.0.0/include -I/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8
 cxx_bin: cxx.bin
 main_bin: onefile.bin
 
