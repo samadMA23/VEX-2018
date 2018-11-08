@@ -327,7 +327,6 @@ namespace vex {
   */
   class limit : private __tridevice {
       public:
-
        /**
         * @prog_lang{cpp|pro}
         * @drawer_cat{constructor}
