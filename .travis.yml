@@ -29,6 +29,6 @@ matrix:
 before_install:
     - eval "${MATRIX_EVAL}"
 
-script: 
+script:
   - cd Build
   - make

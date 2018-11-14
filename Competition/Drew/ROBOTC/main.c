@@ -43,6 +43,7 @@ task usercontrol()
 {
 	while(true)
 	{
+		if(vexRT[Btn8U] == 1) startTask(autonomous);
 		mapJoystick();
 	}
 }
