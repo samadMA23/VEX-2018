@@ -36,14 +36,18 @@ void pre_auton()
 
 task autonomous()
 {
-
+	moveForward(500, MAX_SPEED);
+	rightSpin(600, MAX_SPEED);
+	moveBackward(1000, MAX_SPEED);
+	fireBall();
 }
 
 task usercontrol()
 {
 	while(true)
 	{
-		if(vexRT[Btn8U] == 1) startTask(autonomous);
+		if(vexRT[Btn8D] == 1)
+			fireBall();
 		mapJoystick();
 	}
 }

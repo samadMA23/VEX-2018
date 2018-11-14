@@ -30,7 +30,7 @@ void mapJoystick() {
 	if(vexRT[Btn7L] == 1){
 		motor[lift] = MAX_SPEED;
 		motor[intake] = MAX_SPEED;
-	}else {
+		}else {
 		motor[lift] = NO_SPEED;
 		motor[intake] = NO_SPEED;
 	}
@@ -38,7 +38,7 @@ void mapJoystick() {
 	if(vexRT[Btn7R] == 1){
 		motor[pistonRight] = MAX_SPEED;
 		motor[pistonLeft] = MAX_SPEED;
-	}else{
+		}else{
 		motor[pistonRight] = NO_SPEED;
 		motor[pistonLeft] = NO_SPEED;
 	}

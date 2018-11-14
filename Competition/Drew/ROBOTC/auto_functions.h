@@ -96,8 +96,8 @@ void feedBall(float time)
 
 bool fireBall()
 {
-	if(mainLift != READY)
-		return false; // Ball shot failed, we return false
+	//if(mainLift != READY)
+	//	return false; // Ball shot failed, we return false
 	// We want the ball to be fed first
 
 	// TODO: Add adjustment function for angle of shot
@@ -109,7 +109,7 @@ bool fireBall()
 	motor[pistonLeft] = NO_SPEED;
 	motor[pistonRight] = NO_SPEED;
 
-	mainLift = STOPPED; // Reset lift for next shot
+	// mainLift = STOPPED; // Reset lift for next shot
 
 	return true; // Shot completed successfully
 }
