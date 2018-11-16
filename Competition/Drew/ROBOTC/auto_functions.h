@@ -84,20 +84,25 @@ void leftVeer(float time, int speed, int offset) {
 	stopDrive();
 }
 
-void feedBall(float time)
+/*void feedBall(float time = FEED_LENGTH)
 {
 	mainLift = STARTED;
 	motor[lift] = MAX_SPEED;
+	motor[pistonLeft] = 100;
+	motor[pistonRight] = 100;
 	wait1Msec(time);
 	mainLift = READY; // Assuming ball has fed into the piston
 	// TODO: Add actual way to check we have a ball (HW & SW)
 	motor[lift] = NO_SPEED;
-}
+}*/
 
-bool fireBall()
+bool fireBall(bool forceShot)
 {
-	//if(mainLift != READY)
-	//	return false; // Ball shot failed, we return false
+	if(forceShot)
+		mainLift = READY;
+
+	if(mainLift != READY)
+		return false; // Ball shot failed, we return false
 	// We want the ball to be fed first
 
 	// TODO: Add adjustment function for angle of shot
@@ -105,11 +110,13 @@ bool fireBall()
 
 	motor[pistonLeft] = MAX_SPEED;
 	motor[pistonRight] = MAX_SPEED;
+	motor[lift] = MAX_SPEED;
 	wait1Msec(PISTON_LENGTH); // Placeholder for time
+	motor[lift] = NO_SPEED;
 	motor[pistonLeft] = NO_SPEED;
 	motor[pistonRight] = NO_SPEED;
 
-	// mainLift = STOPPED; // Reset lift for next shot
+	mainLift = STOPPED; // Reset lift for next shot
 
 	return true; // Shot completed successfully
 }
