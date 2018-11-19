@@ -14,6 +14,7 @@
 
 #include "motors.h"
 #include "auto_functions.h"
+#include "auto_selector.h"
 
 void pre_auton()
 {
@@ -32,16 +33,13 @@ void pre_auton()
 		//feedBall(0);
 		fireBall(false);
 	}
+	while(bIfiRobotDisabled)
+		getInput(); // Get Input for auto selection
 }
 
 task autonomous()
 {
-	moveForward(500, MAX_SPEED);
-	rightSpin(600, MAX_SPEED);
-	moveBackward(1000, MAX_SPEED);
-	//feedBall();
-   	if(!fireBall(false)) // Forcing true for testing purposes
-		fireBall(true);
+	doAuto(); // Jump to auto selector code
 }
 
 task usercontrol()

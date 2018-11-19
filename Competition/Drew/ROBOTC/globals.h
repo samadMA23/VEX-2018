@@ -1,14 +1,13 @@
 #ifndef GLOBALS
 #define GLOBALS
 
-//	mo tors.h
+//	motors.h
 #define MAX_SPEED 127
 #define MIN_SPEED 1
 #define NO_SPEED 0
 
 //	auto_functions.h
-float PISTON_LENGTH = 4100; //Time it takes for piston to fire
-float FEED_LENGTH = 3000; //Time it takes to feed ball
+float PISTON_LENGTH = 4300; //Time it takes for piston to fire
 
 typedef enum AUTO_SELECTION {
 	RED_FRONT,
@@ -16,13 +15,13 @@ typedef enum AUTO_SELECTION {
 	BLUE_FRONT,
 	BLUE_BACK
 } Autoselection;
+Autoselection currentSelection = RED_BACK; // Global Autonomous Selection
 
 typedef enum LIFT_STATES {
 	STOPPED,
 	STARTED,
 	READY
 } Liftstate;
+Liftstate mainLift = STOPPED; // Global liftstate
 
-Liftstate	mainLift = STOPPED;
-Autoselection	current = RED_BACK;
 #endif /* GLOBALS */
