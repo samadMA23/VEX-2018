@@ -1,0 +1,17 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Pack",
+            "type": "shell",
+            "command": "C:\\Users\\SchineAJ23\\Desktop\\VEX-2018\\Competition\\Drew\\Cpp\\Concept-InProgress\\pack.bat"
+        },
+        {
+            "label": "Unpack",
+            "type": "shell",
+            "command": "C:\\Users\\SchineAJ23\\Desktop\\VEX-2018\\Competition\\Drew\\Cpp\\Concept-InProgress\\unpack.bat"
+        }
+    ]
+}
