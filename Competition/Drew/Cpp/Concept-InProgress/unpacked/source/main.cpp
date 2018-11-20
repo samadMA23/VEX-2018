@@ -50,7 +50,6 @@ namespace auton {
         void leftVeer(uint32_t time, double speed, double o);
         void feedBall(uint32_t time);
         bool fireBall();
-
     }; extern AutoFunctions functions;
 
     LiftState AutoFunctions::getLiftState(){
@@ -85,9 +84,7 @@ namespace auton {
         task::sleep(time);
         if(stopBetweenFunctions) stopDrive();
     }
-
-
-
+    
     void AutoFunctions::rightTurn(uint32_t time, double speed){
         p_rDrive.spin(directionType::fwd, speed, velocityUnits::pct);
         task::sleep(time);
@@ -134,10 +131,6 @@ namespace auton {
     bool AutoFunctions::fireBall(){
         if(getLiftState() != READY)
             return false;
-
-
-
-
 
         p_piston.spin(directionType::fwd, 100, velocityUnits::pct);
         task::sleep(PISTON_LENGTH);
@@ -197,14 +190,9 @@ namespace drive {
 
 
 void pre_auton() {
-
-
-
 }
 
 void autonomous() {
-
-
 }
 
 void drivercontrol() {
