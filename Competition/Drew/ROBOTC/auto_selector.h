@@ -26,14 +26,17 @@ void doAuto()
 	switch(currentSelection)
 	{
 	case RED_FRONT:
+		moveBackward(500, MAX_SPEED);
+		fireBall(true);
+		moveBackward(1200, MAX_SPEED);
+		moveForward(1000, MAX_SPEED);
 		break;
 
-	case RED_BACK:
+	case RED_BACK: // Work in progress
 		moveForward(700, MAX_SPEED);
 		rightSpin(800, MAX_SPEED);
 		moveBackward(900, MAX_SPEED);
-		if(!fireBall(false)) // Forcing true for testing purposes
-			fireBall(true);
+		fireBall(true);
 		break;
 	case BLUE_FRONT:
 		break;
