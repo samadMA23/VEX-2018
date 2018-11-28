@@ -29,7 +29,6 @@ void pre_auton()
 		leftVeer(0, 0, 0);
 		rightSpin(0, 0);
 		leftSpin(0, 0);
-		//feedBall(0);
 		fireBall(false);
 	}
 	while(bIfiRobotDisabled)

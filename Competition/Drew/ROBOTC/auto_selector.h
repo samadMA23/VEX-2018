@@ -28,7 +28,7 @@ void doAuto()
 	case RED_FRONT:
 		moveBackward(500, MAX_SPEED);
 		fireBall(true);
-		moveBackward(1200, MAX_SPEED);
+		moveBackward(2000, MAX_SPEED);
 		moveForward(1000, MAX_SPEED);
 		break;
 
