@@ -139,33 +139,33 @@ task autonomous()
 	motor[frontleftmotor] = -127;
 	motor[backleftmotor] = -127;
 	wait1Msec(1000);
-	stop_robot;
+	stop_Robot();
 	motor[frontrightmotor] = 127;
 	motor[backrightmotor] = 127;
 	motor[frontleftmotor] = 127;
 	motor[backleftmotor] = 127;
 	wait1Msec(1000);
-	stop_Robot;
+	stop_Robot();
 	motor[frontleftmotor] = 127;
 	motor[backleftmotor] = 127;
 	wait1Msec(1000);
-	stop_Robot;
+	stop_Robot();
 	motor[frontrightmotor] = 127;
 	motor[backrightmotor] = 127;
 	motor[frontleftmotor] = 127;
 	motor[backleftmotor] = 127;
 	wait1Msec(500);
-	stop_Robot;
+	stop_Robot();
 	motor[frontleftmotor] = 127;
 	motor[backleftmotor] = 127;
 	wait1Msec(1000);
-	stop_robot;
+	stop_Robot();
 	motor[frontrightmotor] = 127;
 	motor[backrightmotor] = 127;
 	motor[frontleftmotor] = 127;
 	motor[backleftmotor] = 127;
 	wait1Msec(1000);
-	stop_robot;
+	stop_Robot();
 	
 	
 }
