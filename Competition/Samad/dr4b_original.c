@@ -83,29 +83,13 @@ void pre_auton()
 		motor[frontleftmotor] = 0;
 		motor[backleftmotor] = 0;
 		wait1Msec(1000);
-		
+
 
 
 	}
 
 void pre_auton()
-
 {
-
-
-	// Set bDisplayCompetitionStatusOnLcd to false if you don't want the LCD
-
-	// used by the competition include file, for example, you might want
-
-	// to display your team name on the LCD in this function.
-
-	// bDisplayCompetitionStatusOnLcd = false;
-
-
-
-	// All activities that occur before the competition starts
-
-	// Example: clearing encoders, setting servo positions, ...
 
 }
 
@@ -166,12 +150,12 @@ task autonomous()
 	motor[backleftmotor] = 127;
 	wait1Msec(1000);
 	stop_Robot();
-	
-	
+
+
 }
-	
-	
-	
+
+
+
 
 
 

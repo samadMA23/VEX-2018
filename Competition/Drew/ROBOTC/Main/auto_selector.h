@@ -26,6 +26,7 @@ void doAuto()
 	switch(currentSelection)
 	{
 	case RED_FRONT:
+		rightTurn(100, MAX_SPEED);
 		moveBackward(500, MAX_SPEED);
 		fireBall(true);
 		moveBackward(2000, MAX_SPEED);
@@ -39,6 +40,7 @@ void doAuto()
 		fireBall(true);
 		break;
 	case BLUE_FRONT:
+		rightTurn(100, MAX_SPEED);
 		moveBackward(500, MAX_SPEED);
 		fireBall(true);
 		moveBackward(2000, MAX_SPEED);
