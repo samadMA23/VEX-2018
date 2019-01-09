@@ -10,15 +10,13 @@
 #ifndef AUTO_SELECTOR_H_
 #define AUTO_SELECTOR_H_
 
-// TODO: FINISH THIS
 
 void getInput()
 {
-	if(!bIfiRobotDisabled) return;
-	if(vexRT[Btn5D]) currentSelection = RED_FRONT;
-	if(vexRT[Btn5U]) currentSelection = RED_BACK;
-	if(vexRT[Btn6D]) currentSelection = BLUE_FRONT;
-	if(vexRT[Btn6U]) currentSelection = BLUE_BACK;
+	if(vexRT[Btn5D] == 1) currentSelection = RED_FRONT;
+	if(vexRT[Btn5U] == 1) currentSelection = RED_BACK;
+	if(vexRT[Btn6D] == 1) currentSelection = BLUE_FRONT;
+	if(vexRT[Btn6U] == 1) currentSelection = BLUE_BACK;
 }
 
 void doAuto()
@@ -26,21 +24,19 @@ void doAuto()
 	switch(currentSelection)
 	{
 	case RED_FRONT:
-		rightTurn(100, MAX_SPEED);
 		moveBackward(500, MAX_SPEED);
 		fireBall(true);
 		moveBackward(2000, MAX_SPEED);
 		moveForward(1000, MAX_SPEED);
 		break;
 
-	case RED_BACK: // Work in progress
-		moveForward(700, MAX_SPEED);
-		rightSpin(800, MAX_SPEED);
-		moveBackward(900, MAX_SPEED);
+	case RED_BACK:
 		fireBall(true);
+		moveBackward(600, MAX_SPEED);
+		rightSpin(400, MAX_SPEED);
+		moveBackward(2500, MAX_SPEED);
 		break;
 	case BLUE_FRONT:
-		rightTurn(100, MAX_SPEED);
 		moveBackward(500, MAX_SPEED);
 		fireBall(true);
 		moveBackward(2000, MAX_SPEED);
@@ -48,10 +44,10 @@ void doAuto()
 		break;
 
 	case BLUE_BACK:
-		moveForward(700, MAX_SPEED);
-		leftSpin(800, MAX_SPEED);
-		moveBackward(900, MAX_SPEED);
 		fireBall(true);
+		moveBackward(600, MAX_SPEED);
+		leftSpin(400, MAX_SPEED);
+		moveBackward(2500, MAX_SPEED);
 		break;
 
 	default:
