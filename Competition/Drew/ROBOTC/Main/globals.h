@@ -14,9 +14,10 @@ typedef enum AUTO_SELECTION {
 	RED_FRONT,
 	RED_BACK,
 	BLUE_FRONT,
-	BLUE_BACK
+	BLUE_BACK,
+	SKILLS
 } Autoselection;
-Autoselection currentSelection = RED_BACK; // Global Autonomous Selection
+Autoselection currentSelection = SKILLS; // Global Autonomous Selection
 
 typedef enum LIFT_STATES {
 	STOPPED,

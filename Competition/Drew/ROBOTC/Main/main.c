@@ -28,9 +28,10 @@ void pre_auton()
 		rightTurn(0, 0);
 		rightVeer(0, 0, 0);
 		leftVeer(0, 0, 0);
+		_skills_old();
 	}
-	while(bIfiRobotDisabled) {
-		getInput(); } // Get Input for auto selection
+	while(bIfiRobotDisabled)
+		getInput();  // Get Input for auto selection
 }
 
 task autonomous()

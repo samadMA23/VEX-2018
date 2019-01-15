@@ -10,6 +10,7 @@
 #ifndef AUTO_SELECTOR_H_
 #define AUTO_SELECTOR_H_
 
+#include "skills_functions.h"
 
 void getInput()
 {
@@ -48,6 +49,22 @@ void doAuto()
 		moveBackward(600, MAX_SPEED);
 		leftSpin(400, MAX_SPEED);
 		moveBackward(2500, MAX_SPEED);
+		break;
+
+	case SKILLS:
+		moveForward(500, MAX_SPEED); // Move back to last tile
+		fireBall(true); // Fire ball, get top flag
+		rightSpin(400, MAX_SPEED); // Turn towards cap
+		flipCap(1000); // flip cap, hurr durr
+
+		rightSpin(200, MAX_SPEED); // Turn towards the group of caps
+		moveForward(1000, MAX_SPEED);
+		leftSpin(200, MAX_SPEED);
+
+		moveForward(2000, MAX_SPEED); // bulldoze those caps
+		rightSpin(400, MAX_SPEED); // turn towards flags
+		park(true); // park
+
 		break;
 
 	default:
