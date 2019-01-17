@@ -10,12 +10,15 @@
 
 // More functions, being used for skills
 
-void park(bool isRed)
+void park(bool isStartingPos)
 {
-	moveBackward(600, MAX_SPEED);
-	if(isRed) rightSpin(400, MAX_SPEED);
-	else leftSpin(400, MAX_SPEED);
-	moveBackward(2500, MAX_SPEED);
+	if(isStartingPos) {
+		moveBackward(600, MAX_SPEED);
+		rightSpin(400, MAX_SPEED);
+		moveBackward(2500, MAX_SPEED);
+	}else{
+		moveBackward(2500, MAX_SPEED);
+	}
 }
 
 void flipCap(float time)
